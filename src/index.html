@@ -1,0 +1,2191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CryptoPro - Premium Cryptocurrency Platform</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-purple: #6366f1;
+        --dark-purple: #4f46e5;
+        --light-purple: #a5b4fc;
+        --accent-purple: #8b5cf6;
+        --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --white: #ffffff;
+        --light-gray: #f8fafc;
+        --medium-gray: #e2e8f0;
+        --dark-gray: #64748b;
+        --text-dark: #1e293b;
+        --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-heavy: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background: var(--white);
+        overflow-x: hidden;
+      }
+
+      /* Navigation */
+      .navbar {
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--medium-gray);
+        padding: 1rem 0;
+        transition: all 0.3s ease;
+      }
+
+      .navbar.scrolled {
+        box-shadow: var(--shadow-medium);
+      }
+
+      .navbar-brand {
+        font-weight: 800;
+        font-size: 1.5rem;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-link {
+        font-weight: 500;
+        color: var(--text-dark) !important;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .nav-link:hover {
+        color: var(--primary-purple) !important;
+        transform: translateY(-2px);
+      }
+
+      .nav-link.active {
+        color: var(--primary-purple) !important;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background: var(--gradient-primary);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      /* Page Container */
+      .page {
+        display: none;
+        min-height: 100vh;
+        padding-top: 80px;
+      }
+
+      .page.active {
+        display: block;
+        animation: fadeInUp 0.6s ease;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Hero Section */
+      .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="25" cy="75" r="1" fill="white" opacity="0.05"/><circle cx="75" cy="25" r="1" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-title {
+        font-size: 4rem;
+        font-weight: 800;
+        color: var(--white);
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+      }
+
+      .hero-subtitle {
+        font-size: 1.25rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 2rem;
+        font-weight: 400;
+      }
+
+      .btn-primary-custom {
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: var(--white);
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .btn-primary-custom:hover {
+        background: var(--white);
+        color: var(--primary-purple);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Floating Animation */
+      .floating {
+        animation: floating 3s ease-in-out infinite;
+      }
+
+      @keyframes floating {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      /* Cards */
+      .card-custom {
+        background: var(--white);
+        border: none;
+        border-radius: 20px;
+        box-shadow: var(--shadow-light);
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+
+      .card-custom:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-heavy);
+      }
+
+      .card-header-custom {
+        background: var(--gradient-primary);
+        color: var(--white);
+        border: none;
+        padding: 1.5rem;
+      }
+
+      /* Stats Cards */
+      .stat-card {
+        background: var(--white);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: var(--shadow-light);
+        transition: all 0.3s ease;
+        text-align: center;
+        border: 1px solid var(--medium-gray);
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-medium);
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .stat-label {
+        color: var(--dark-gray);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      /* Trading Interface */
+      .trading-panel {
+        background: var(--white);
+        border-radius: 20px;
+        box-shadow: var(--shadow-medium);
+        overflow: hidden;
+      }
+
+      .trading-header {
+        background: var(--gradient-primary);
+        color: var(--white);
+        padding: 1.5rem;
+        font-weight: 600;
+      }
+
+      .price-display {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary-purple);
+      }
+
+      .price-change.positive {
+        color: #10b981;
+      }
+
+      .price-change.negative {
+        color: #ef4444;
+      }
+
+      /* Analytics Charts */
+      .chart-container {
+        background: var(--white);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: var(--shadow-light);
+        margin-bottom: 2rem;
+      }
+
+      /* News Cards */
+      .news-card {
+        background: var(--white);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: var(--shadow-light);
+        transition: all 0.3s ease;
+        border: 1px solid var(--medium-gray);
+      }
+
+      .news-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-medium);
+      }
+
+      .news-date {
+        color: var(--dark-gray);
+        font-size: 0.875rem;
+      }
+
+      /* Contact Form */
+      .form-control-custom {
+        border: 2px solid var(--medium-gray);
+        border-radius: 10px;
+        padding: 12px 16px;
+        transition: all 0.3s ease;
+      }
+
+      .form-control-custom:focus {
+        border-color: var(--primary-purple);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--gradient-primary);
+        color: var(--white);
+        padding: 3rem 0 1rem;
+        margin-top: 4rem;
+      }
+
+      .footer h5 {
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .footer a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .footer a:hover {
+        color: var(--white);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.1rem;
+        }
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--light-gray);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--primary-purple);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--dark-purple);
+      }
+
+      /* Loading Animation */
+      .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(99, 102, 241, 0.3);
+        border-radius: 50%;
+        border-top-color: var(--primary-purple);
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Icon Styling */
+      .icon-wrapper {
+        width: 60px;
+        height: 60px;
+        background: var(--gradient-primary);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      /* Performance Table */
+      .performance-table {
+        background: var(--white);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: var(--shadow-light);
+      }
+
+      .table-header {
+        background: var(--gradient-primary);
+        color: var(--white);
+      }
+
+      .performance-row:hover {
+        background: var(--light-gray);
+      }
+
+      .h1-left-border {
+        border-left: 6px solid var(--primary-purple);
+        padding-left: 20px;
+      }
+
+      .h1-center-underline {
+        position: relative;
+        text-align: center;
+        padding-bottom: 20px;
+      }
+      .h1-center-underline::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background: var(--gradient-primary);
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#" onclick="showPage('home')">
+          <i class="fas fa-chart-line me-2"></i>CryptoPro
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#" onclick="showPage('home')"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showPage('about')"
+                >About Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showPage('trading')"
+                >Trading</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showPage('performance')"
+                >Performance</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showPage('analytics')"
+                >Analytics</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showPage('news')">News</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showPage('contact')"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+              <div class="hero-content">
+                <h1 class="hero-title">
+                  Future of <span class="floating">Crypto</span> Trading
+                </h1>
+                <p class="hero-subtitle">
+                  Experience next-generation cryptocurrency trading with
+                  advanced analytics, real-time data, and professional-grade
+                  tools.
+                </p>
+                <div class="d-flex gap-3">
+                  <button
+                    class="btn btn-primary-custom"
+                    onclick="showPage('trading')"
+                  >
+                    <i class="fas fa-rocket me-2"></i>Start Trading
+                  </button>
+                  <button class="btn btn-primary-custom">
+                    <i class="fas fa-play me-2"></i>Watch Demo
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="text-center">
+                <div class="floating">
+                  <i
+                    class="fas fa-coins"
+                    style="font-size: 12rem; color: rgba(255, 255, 255, 0.2)"
+                  ></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats Section -->
+      <section class="py-5">
+        <div class="container">
+          <div class="row g-4 mt-5">
+            <div class="col-lg-3 col-md-6">
+              <div class="stat-card">
+                <div class="stat-number">$2.4B+</div>
+                <div class="stat-label">Trading Volume</div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="stat-card">
+                <div class="stat-number">150K+</div>
+                <div class="stat-label">Active Users</div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Cryptocurrencies</div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="stat-card">
+                <div class="stat-number">99.9%</div>
+                <div class="stat-label">Uptime</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="py-5 bg-light">
+        <div class="container">
+          <div class="text-center mb-5">
+            <h2 class="display-4 fw-bold">Why Choose CryptoPro?</h2>
+            <p class="lead text-muted">
+              Advanced features designed for serious traders
+            </p>
+          </div>
+          <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+              <div class="card-custom h-100 text-center p-4">
+                <div class="icon-wrapper mx-auto">
+                  <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4>Bank-Grade Security</h4>
+                <p class="text-muted">
+                  Multi-layer security protocols with cold storage and 2FA
+                  protection.
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="card-custom h-100 text-center p-4">
+                <div class="icon-wrapper mx-auto">
+                  <i class="fas fa-chart-bar"></i>
+                </div>
+                <h4>Advanced Analytics</h4>
+                <p class="text-muted">
+                  Professional trading tools with real-time market analysis and
+                  insights.
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="card-custom h-100 text-center p-4">
+                <div class="icon-wrapper mx-auto">
+                  <i class="fas fa-lightning-bolt"></i>
+                </div>
+                <h4>Lightning Fast</h4>
+                <p class="text-muted">
+                  Ultra-low latency trading engine with instant order execution.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Trading Page -->
+    <div id="trading" class="page">
+      <div class="container">
+        <div class="row" style="margin-top: 4rem">
+          <div class="col-12">
+            <h1 class="display-4 fw-bold mb-5 h1-center-underline">
+              Advanced Trading
+            </h1>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="trading-panel">
+              <div class="trading-header">
+                <h4>
+                  <i class="fas fa-chart-line me-2"></i>Live Trading Chart
+                </h4>
+              </div>
+              <div class="p-4">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-4"
+                >
+                  <div>
+                    <h3 class="price-display">$45,678.90</h3>
+                    <span class="price-change positive">
+                      <i class="fas fa-arrow-up me-1"></i>+2.45% (24h)
+                    </span>
+                  </div>
+                  <div class="btn-group">
+                    <button class="btn btn-outline-primary">1H</button>
+                    <button class="btn btn-primary">24H</button>
+                    <button class="btn btn-outline-primary">7D</button>
+                    <button class="btn btn-outline-primary">1M</button>
+                  </div>
+                </div>
+                <div
+                  style="
+                    height: 400px;
+                    background: linear-gradient(45deg, #f8fafc, #e2e8f0);
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <div class="text-center">
+                    <i
+                      class="fas fa-chart-area"
+                      style="
+                        font-size: 4rem;
+                        color: var(--primary-purple);
+                        opacity: 0.3;
+                      "
+                    ></i>
+                    <p class="mt-3 text-muted">Interactive Trading Chart</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card-custom">
+              <div class="card-header-custom">
+                <h5><i class="fas fa-exchange-alt me-2"></i>Quick Trade</h5>
+              </div>
+              <div class="p-4">
+                <div class="mb-3">
+                  <label class="form-label">Trading Pair</label>
+                  <select class="form-select form-control-custom">
+                    <option>BTC/USD</option>
+                    <option>ETH/USD</option>
+                    <option>LTC/USD</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Order Type</label>
+                  <div class="btn-group w-100">
+                    <button class="btn btn-outline-primary active">Buy</button>
+                    <button class="btn btn-outline-danger">Sell</button>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Amount (BTC)</label>
+                  <input
+                    type="number"
+                    class="form-control form-control-custom"
+                    placeholder="0.00"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Price (USD)</label>
+                  <input
+                    type="number"
+                    class="form-control form-control-custom"
+                    placeholder="45,678.90"
+                  />
+                </div>
+                <button class="btn btn-primary w-100">
+                  <i class="fas fa-bolt me-2"></i>Execute Trade
+                </button>
+              </div>
+            </div>
+
+            <div class="card-custom mt-4">
+              <div class="card-header-custom">
+                <h5><i class="fas fa-list me-2"></i>Order Book</h5>
+              </div>
+              <div class="p-3" style="max-height: 300px; overflow-y: auto">
+                <div class="small text-muted mb-2">
+                  <div class="row">
+                    <div class="col">Price</div>
+                    <div class="col text-end">Amount</div>
+                  </div>
+                </div>
+                <!-- Sell Orders -->
+                <div class="mb-3">
+                  <div class="row small text-danger mb-1">
+                    <div class="col">45,720.50</div>
+                    <div class="col text-end">0.025</div>
+                  </div>
+                  <div class="row small text-danger mb-1">
+                    <div class="col">45,715.30</div>
+                    <div class="col text-end">0.152</div>
+                  </div>
+                  <div class="row small text-danger mb-1">
+                    <div class="col">45,710.90</div>
+                    <div class="col text-end">0.089</div>
+                  </div>
+                </div>
+                <hr />
+                <!-- Buy Orders -->
+                <div>
+                  <div class="row small text-success mb-1">
+                    <div class="col">45,678.90</div>
+                    <div class="col text-end">0.234</div>
+                  </div>
+                  <div class="row small text-success mb-1">
+                    <div class="col">45,675.20</div>
+                    <div class="col text-end">0.456</div>
+                  </div>
+                  <div class="row small text-success mb-1">
+                    <div class="col">45,670.10</div>
+                    <div class="col text-end">0.123</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Performance Page -->
+    <div id="performance" class="page">
+      <div class="container">
+        <div class="row" style="margin-top: 4rem">
+          <div class="col-12">
+            <h1 class="display-4 fw-bold mb-5 h1-center-underline">
+              Performance Dashboard
+            </h1>
+          </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+              <div class="stat-number text-success">+24.5%</div>
+              <div class="stat-label">Portfolio Return</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+              <div class="stat-number">$125,430</div>
+              <div class="stat-label">Total Balance</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+              <div class="stat-number text-success">+$24,567</div>
+              <div class="stat-label">Today's P&L</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+              <div class="stat-number">156</div>
+              <div class="stat-label">Total Trades</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="performance-table">
+          <div class="table-header p-3">
+            <h5 class="mb-0">
+              <i class="fas fa-trophy me-2"></i>Top Performing Assets
+            </h5>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="bg-light">
+                <tr>
+                  <th>Asset</th>
+                  <th>Price</th>
+                  <th>24h Change</th>
+                  <th>Volume</th>
+                  <th>Market Cap</th>
+                  <th>Holdings</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="performance-row">
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div
+                        class="icon-wrapper me-3"
+                        style="width: 40px; height: 40px; font-size: 1rem"
+                      >
+                        ₿
+                      </div>
+                      <div>
+                        <strong>Bitcoin</strong>
+                        <div class="small text-muted">BTC</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>$45,678.90</td>
+                  <td><span class="text-success">+2.45%</span></td>
+                  <td>$24.5B</td>
+                  <td>$890.2B</td>
+                  <td>2.5 BTC</td>
+                </tr>
+                <tr class="performance-row">
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div
+                        class="icon-wrapper me-3"
+                        style="width: 40px; height: 40px; font-size: 1rem"
+                      >
+                        Ξ
+                      </div>
+                      <div>
+                        <strong>Ethereum</strong>
+                        <div class="small text-muted">ETH</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>$3,245.67</td>
+                  <td><span class="text-success">+4.12%</span></td>
+                  <td>$12.8B</td>
+                  <td>$390.5B</td>
+                  <td>12.8 ETH</td>
+                </tr>
+                <tr class="performance-row">
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div
+                        class="icon-wrapper me-3"
+                        style="width: 40px; height: 40px; font-size: 1rem"
+                      >
+                        ₳
+                      </div>
+                      <div>
+                        <strong>Cardano</strong>
+                        <div class="small text-muted">ADA</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>$1.23</td>
+                  <td><span class="text-danger">-1.23%</span></td>
+                  <td>$1.2B</td>
+                  <td>$41.2B</td>
+                  <td>1,250 ADA</td>
+                </tr>
+                <tr class="performance-row">
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div
+                        class="icon-wrapper me-3"
+                        style="width: 40px; height: 40px; font-size: 1rem"
+                      >
+                        ◉
+                      </div>
+                      <div>
+                        <strong>Polkadot</strong>
+                        <div class="small text-muted">DOT</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>$8.45</td>
+                  <td><span class="text-success">+6.78%</span></td>
+                  <td>$890M</td>
+                  <td>$9.8B</td>
+                  <td>45.2 DOT</td>
+                </tr>
+                <tr class="performance-row">
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div
+                        class="icon-wrapper me-3"
+                        style="width: 40px; height: 40px; font-size: 1rem"
+                      >
+                        Ł
+                      </div>
+                      <div>
+                        <strong>Litecoin</strong>
+                        <div class="small text-muted">LTC</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>$156.78</td>
+                  <td><span class="text-success">+3.21%</span></td>
+                  <td>$2.1B</td>
+                  <td>$11.4B</td>
+                  <td>8.7 LTC</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics Page -->
+    <div id="analytics" class="page">
+      <div class="container">
+        <div class="row" style="margin-top: 4rem">
+          <div class="col-12">
+            <h1 class="display-4 fw-bold mb-5 h1-center-underline">
+              Advanced Analytics
+            </h1>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="chart-container">
+              <div
+                class="d-flex justify-content-between align-items-center mb-4"
+              >
+                <h4>
+                  <i class="fas fa-chart-line me-2"></i>Portfolio Performance
+                </h4>
+                <div class="btn-group">
+                  <button class="btn btn-outline-primary">1D</button>
+                  <button class="btn btn-primary">1W</button>
+                  <button class="btn btn-outline-primary">1M</button>
+                  <button class="btn btn-outline-primary">1Y</button>
+                </div>
+              </div>
+              <div
+                style="
+                  height: 350px;
+                  background: linear-gradient(45deg, #f8fafc, #e2e8f0);
+                  border-radius: 10px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <div class="text-center">
+                  <i
+                    class="fas fa-analytics"
+                    style="
+                      font-size: 4rem;
+                      color: var(--primary-purple);
+                      opacity: 0.3;
+                    "
+                  ></i>
+                  <p class="mt-3 text-muted">Advanced Analytics Chart</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-container">
+              <h4><i class="fas fa-pie-chart me-2"></i>Asset Allocation</h4>
+              <div
+                style="
+                  height: 300px;
+                  background: linear-gradient(45deg, #f8fafc, #e2e8f0);
+                  border-radius: 10px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <div class="text-center">
+                  <i
+                    class="fas fa-chart-pie"
+                    style="
+                      font-size: 4rem;
+                      color: var(--primary-purple);
+                      opacity: 0.3;
+                    "
+                  ></i>
+                  <p class="mt-3 text-muted">Portfolio Distribution Chart</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="card-custom">
+              <div class="card-header-custom">
+                <h5><i class="fas fa-calculator me-2"></i>Risk Metrics</h5>
+              </div>
+              <div class="p-4">
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between">
+                    <span>Sharpe Ratio</span>
+                    <strong>1.45</strong>
+                  </div>
+                  <div class="progress mt-1">
+                    <div class="progress-bar" style="width: 75%"></div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between">
+                    <span>Max Drawdown</span>
+                    <strong>-12.5%</strong>
+                  </div>
+                  <div class="progress mt-1">
+                    <div
+                      class="progress-bar bg-warning"
+                      style="width: 25%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between">
+                    <span>Volatility</span>
+                    <strong>18.3%</strong>
+                  </div>
+                  <div class="progress mt-1">
+                    <div class="progress-bar bg-info" style="width: 45%"></div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between">
+                    <span>Beta</span>
+                    <strong>0.89</strong>
+                  </div>
+                  <div class="progress mt-1">
+                    <div
+                      class="progress-bar bg-success"
+                      style="width: 60%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-custom mt-4">
+              <div class="card-header-custom">
+                <h5><i class="fas fa-bullseye me-2"></i>Trading Insights</h5>
+              </div>
+              <div class="p-4">
+                <div class="mb-3 p-3 bg-light rounded">
+                  <div class="small text-muted">Win Rate</div>
+                  <div class="h5 text-success mb-0">68.5%</div>
+                </div>
+                <div class="mb-3 p-3 bg-light rounded">
+                  <div class="small text-muted">Avg. Profit</div>
+                  <div class="h5 text-success mb-0">+$2,345</div>
+                </div>
+                <div class="mb-3 p-3 bg-light rounded">
+                  <div class="small text-muted">Avg. Loss</div>
+                  <div class="h5 text-danger mb-0">-$1,234</div>
+                </div>
+                <div class="p-3 bg-light rounded">
+                  <div class="small text-muted">Profit Factor</div>
+                  <div class="h5 text-primary mb-0">1.9x</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- News Page -->
+    <div id="news" class="page">
+      <div class="container">
+        <div class="row" style="margin-top: 4rem">
+          <div class="col-12">
+            <h1 class="display-4 fw-bold mb-5 h1-center-underline">
+              Crypto News & Updates
+            </h1>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="news-card mb-4">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <div
+                    style="
+                      height: 200px;
+                      background: var(--gradient-primary);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <i
+                      class="fas fa-newspaper"
+                      style="font-size: 3rem; color: white; opacity: 0.7"
+                    ></i>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="p-4">
+                    <div class="news-date mb-2">June 17, 2025</div>
+                    <h4>
+                      Bitcoin Reaches New All-Time High Amid Institutional
+                      Adoption
+                    </h4>
+                    <p class="text-muted">
+                      Major financial institutions continue to embrace Bitcoin
+                      as a legitimate asset class, driving unprecedented demand
+                      and price appreciation.
+                    </p>
+                    <a href="#" class="btn btn-outline-primary">Read More</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="news-card mb-4">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <div
+                    style="
+                      height: 200px;
+                      background: var(--gradient-secondary);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <i
+                      class="fas fa-chart-line"
+                      style="font-size: 3rem; color: white; opacity: 0.7"
+                    ></i>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="p-4">
+                    <div class="news-date mb-2">June 16, 2025</div>
+                    <h4>
+                      Ethereum 2.0 Staking Rewards Increase 15% This Quarter
+                    </h4>
+                    <p class="text-muted">
+                      Network upgrades and increased validator participation
+                      have led to higher staking rewards for Ethereum holders.
+                    </p>
+                    <a href="#" class="btn btn-outline-primary">Read More</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="news-card mb-4">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <div
+                    style="
+                      height: 200px;
+                      background: var(--gradient-tertiary);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <i
+                      class="fas fa-globe"
+                      style="font-size: 3rem; color: white; opacity: 0.7"
+                    ></i>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="p-4">
+                    <div class="news-date mb-2">June 15, 2025</div>
+                    <h4>
+                      Global Cryptocurrency Regulations Show Positive Trend
+                    </h4>
+                    <p class="text-muted">
+                      Regulatory clarity continues to improve worldwide,
+                      providing a more stable environment for cryptocurrency
+                      trading and investment.
+                    </p>
+                    <a href="#" class="btn btn-outline-primary">Read More</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="card-custom">
+              <div class="card-header-custom">
+                <h5><i class="fas fa-fire me-2"></i>Trending Topics</h5>
+              </div>
+              <div class="p-4">
+                <div class="mb-3">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span>#Bitcoin</span>
+                    <span class="badge bg-primary">Hot</span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span>#DeFi</span>
+                    <span class="badge bg-success">Rising</span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span>#NFTs</span>
+                    <span class="badge bg-warning">Trending</span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span>#Ethereum</span>
+                    <span class="badge bg-info">Popular</span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span>#Regulation</span>
+                    <span class="badge bg-secondary">Stable</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-custom mt-4">
+              <div class="card-header-custom">
+                <h5><i class="fas fa-bell me-2"></i>Market Alerts</h5>
+              </div>
+              <div class="p-4">
+                <div class="alert alert-success" role="alert">
+                  <i class="fas fa-arrow-up me-2"></i>
+                  <strong>BTC</strong> crossed $45,000 resistance level
+                </div>
+                <div class="alert alert-warning" role="alert">
+                  <i class="fas fa-exclamation-triangle me-2"></i>
+                  High volatility detected in <strong>ETH</strong>
+                </div>
+                <div class="alert alert-info" role="alert">
+                  <i class="fas fa-info-circle me-2"></i>
+                  New staking rewards available for <strong>ADA</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Us Page -->
+    <div id="about" class="page">
+      <div class="container">
+        <div class="row" style="margin-top: 4rem">
+          <div class="col-12">
+            <h1 class="display-4 fw-bold mb-5 h1-center-underline">
+              About CryptoPro
+            </h1>
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-5">
+          <div class="col-lg-6">
+            <h2 class="h1 fw-bold mb-4">
+              Leading the Future of Digital Finance
+            </h2>
+            <p class="lead mb-4">
+              CryptoPro is a next-generation cryptocurrency trading platform
+              designed for both novice and professional traders. Our mission is
+              to democratize access to digital assets while providing
+              enterprise-grade security and performance.
+            </p>
+            <p class="mb-4">
+              Founded by a team of financial technology experts and blockchain
+              enthusiasts, we combine traditional finance expertise with
+              cutting-edge technology to deliver an unparalleled trading
+              experience.
+            </p>
+            <div class="row g-4">
+              <div class="col-6">
+                <div class="text-center">
+                  <div class="h2 fw-bold text-primary">2019</div>
+                  <div class="text-muted">Founded</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="text-center">
+                  <div class="h2 fw-bold text-primary">150K+</div>
+                  <div class="text-muted">Users</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="text-center">
+              <div
+                style="
+                  width: 300px;
+                  height: 300px;
+                  background: var(--gradient-primary);
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin: 0 auto;
+                "
+              >
+                <i
+                  class="fas fa-building"
+                  style="font-size: 6rem; color: white; opacity: 0.8"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+          <div class="col-lg-4">
+            <div class="card-custom h-100 text-center p-4">
+              <div class="icon-wrapper mx-auto">
+                <i class="fas fa-eye"></i>
+              </div>
+              <h4>Our Vision</h4>
+              <p class="text-muted">
+                To create a world where everyone has access to advanced
+                financial tools and opportunities through blockchain technology.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card-custom h-100 text-center p-4">
+              <div class="icon-wrapper mx-auto">
+                <i class="fas fa-bullseye"></i>
+              </div>
+              <h4>Our Mission</h4>
+              <p class="text-muted">
+                To provide secure, reliable, and innovative cryptocurrency
+                trading solutions that empower users to achieve their financial
+                goals.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card-custom h-100 text-center p-4">
+              <div class="icon-wrapper mx-auto">
+                <i class="fas fa-heart"></i>
+              </div>
+              <h4>Our Values</h4>
+              <p class="text-muted">
+                Transparency, security, innovation, and customer-centricity
+                guide everything we do in building the future of finance.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card-custom">
+              <div class="card-header-custom">
+                <h3 class="mb-0">
+                  <i class="fas fa-users me-2"></i>Our Leadership Team
+                </h3>
+              </div>
+              <div class="p-5">
+                <div class="row g-4">
+                  <div class="col-lg-4 col-md-6">
+                    <div class="text-center">
+                      <div
+                        style="
+                          width: 120px;
+                          height: 120px;
+                          background: var(--gradient-primary);
+                          border-radius: 50%;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          margin: 0 auto 1rem;
+                        "
+                      >
+                        <i
+                          class="fas fa-user-tie"
+                          style="font-size: 3rem; color: white"
+                        ></i>
+                      </div>
+                      <h5>Sarah Johnson</h5>
+                      <p class="text-muted">Chief Executive Officer</p>
+                      <p class="small">
+                        Former Goldman Sachs VP with 15+ years in financial
+                        technology and digital assets.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                    <div class="text-center">
+                      <div
+                        style="
+                          width: 120px;
+                          height: 120px;
+                          background: var(--gradient-secondary);
+                          border-radius: 50%;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          margin: 0 auto 1rem;
+                        "
+                      >
+                        <i
+                          class="fas fa-code"
+                          style="font-size: 3rem; color: white"
+                        ></i>
+                      </div>
+                      <h5>Michael Chen</h5>
+                      <p class="text-muted">Chief Technology Officer</p>
+                      <p class="small">
+                        Blockchain architect and former Google engineer
+                        specializing in high-frequency trading systems.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                    <div class="text-center">
+                      <div
+                        style="
+                          width: 120px;
+                          height: 120px;
+                          background: var(--gradient-tertiary);
+                          border-radius: 50%;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          margin: 0 auto 1rem;
+                        "
+                      >
+                        <i
+                          class="fas fa-shield-alt"
+                          style="font-size: 3rem; color: white"
+                        ></i>
+                      </div>
+                      <h5>David Rodriguez</h5>
+                      <p class="text-muted">Chief Security Officer</p>
+                      <p class="small">
+                        Cybersecurity expert with extensive experience in
+                        financial services and blockchain security.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+      <div class="container">
+        <div class="row" style="margin-top: 4rem">
+          <div class="col-12">
+            <h1 class="display-4 fw-bold mb-5 h1-center-underline">
+              Contact Us
+            </h1>
+          </div>
+        </div>
+
+        <div class="row g-5">
+          <div class="col-lg-8">
+            <div class="card-custom">
+              <div class="card-header-custom">
+                <h3 class="mb-0">
+                  <i class="fas fa-envelope me-2"></i>Get in Touch
+                </h3>
+              </div>
+              <div class="p-5">
+                <form>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label">First Name</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-custom"
+                        placeholder="John"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Last Name</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-custom"
+                        placeholder="Doe"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input
+                      type="email"
+                      class="form-control form-control-custom"
+                      placeholder="john.doe@example.com"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Subject</label>
+                    <select class="form-select form-control-custom">
+                      <option>General Inquiry</option>
+                      <option>Technical Support</option>
+                      <option>Trading Question</option>
+                      <option>Partnership</option>
+                      <option>Media Inquiry</option>
+                    </select>
+                  </div>
+                  <div class="mb-4">
+                    <label class="form-label">Message</label>
+                    <textarea
+                      class="form-control form-control-custom"
+                      rows="6"
+                      placeholder="How can we help you?"
+                    ></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="card-custom h-100">
+              <div class="card-header-custom">
+                <h5>
+                  <i class="fas fa-info-circle me-2"></i>Contact Information
+                </h5>
+              </div>
+              <div class="p-4">
+                <div class="mb-4">
+                  <div class="d-flex align-items-center mb-2">
+                    <div
+                      class="icon-wrapper me-3"
+                      style="width: 40px; height: 40px; font-size: 1rem"
+                    >
+                      <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                      <strong>Address</strong>
+                    </div>
+                  </div>
+                  <p class="text-muted ms-5">
+                    123 Crypto Street<br />Financial District<br />New York, NY
+                    10005
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <div class="d-flex align-items-center mb-2">
+                    <div
+                      class="icon-wrapper me-3"
+                      style="width: 40px; height: 40px; font-size: 1rem"
+                    >
+                      <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                      <strong>Phone</strong>
+                    </div>
+                  </div>
+                  <p class="text-muted ms-5">+1 (555) 123-4567</p>
+                </div>
+
+                <div class="mb-4">
+                  <div class="d-flex align-items-center mb-2">
+                    <div
+                      class="icon-wrapper me-3"
+                      style="width: 40px; height: 40px; font-size: 1rem"
+                    >
+                      <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                      <strong>Email</strong>
+                    </div>
+                  </div>
+                  <p class="text-muted ms-5">support@cryptopro.com</p>
+                </div>
+
+                <div class="mb-4">
+                  <div class="d-flex align-items-center mb-2">
+                    <div
+                      class="icon-wrapper me-3"
+                      style="width: 40px; height: 40px; font-size: 1rem"
+                    >
+                      <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                      <strong>Business Hours</strong>
+                    </div>
+                  </div>
+                  <p class="text-muted ms-5">
+                    Monday - Friday: 9:00 AM - 6:00 PM EST<br />24/7 Online
+                    Support
+                  </p>
+                </div>
+
+                <hr />
+
+                <div>
+                  <h6 class="mb-3">Follow Us</h6>
+                  <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-outline-primary btn-sm">
+                      <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-primary btn-sm">
+                      <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-primary btn-sm">
+                      <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-primary btn-sm">
+                      <i class="fab fa-discord"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <h5>CryptoPro</h5>
+            <p>
+              The future of cryptocurrency trading. Secure, reliable, and
+              innovative solutions for the modern trader.
+            </p>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-outline-purple btn-sm">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="btn btn-outline-purple btn-sm">
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a href="#" class="btn btn-outline-purple btn-sm">
+                <i class="fab fa-telegram"></i>
+              </a>
+              <a href="#" class="btn btn-outline-purple btn-sm">
+                <i class="fab fa-discord"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <h5>Platform</h5>
+            <ul class="list-unstyled">
+              <li><a href="#" onclick="showPage('trading')">Trading</a></li>
+              <li>
+                <a href="#" onclick="showPage('performance')">Performance</a>
+              </li>
+              <li><a href="#" onclick="showPage('analytics')">Analytics</a></li>
+              <li><a href="#" onclick="showPage('news')">News</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2">
+            <h5>Company</h5>
+            <ul class="list-unstyled">
+              <li><a href="#" onclick="showPage('about')">About Us</a></li>
+              <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Press</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2">
+            <h5>Support</h5>
+            <ul class="list-unstyled">
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">API Docs</a></li>
+              <li><a href="#">System Status</a></li>
+              <li><a href="#">Security</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2">
+            <h5>Legal</h5>
+            <ul class="list-unstyled">
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+              <li><a href="#">Compliance</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr class="my-4" />
+        <div class="text-center">
+          <p class="mb-0">
+            &copy; 2025 CryptoPro. All rights reserved. | Designed for
+            professional traders worldwide.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Page Navigation
+      function showPage(pageId) {
+        // Hide all pages
+        document.querySelectorAll(".page").forEach((page) => {
+          page.classList.remove("active");
+        });
+
+        // Show selected page
+        document.getElementById(pageId).classList.add("active");
+
+        // Update navigation
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          link.classList.remove("active");
+        });
+
+        // Add active class to current nav item
+        const activeLink = document.querySelector(
+          `[onclick="showPage('${pageId}')"]`
+        );
+        if (activeLink) {
+          activeLink.classList.add("active");
+        }
+
+        // Scroll to top when changing pages
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // Initialize page on load
+      document.addEventListener("DOMContentLoaded", function () {
+        // Set home as default active page
+        showPage("home");
+
+        // Add floating animation to elements
+        initFloatingAnimations();
+
+        // Initialize trading functionality
+        initTradingFeatures();
+
+        // Initialize performance table interactions
+        initPerformanceTable();
+
+        // Initialize analytics interactions
+        initAnalytics();
+
+        // Initialize form handling
+        initFormHandling();
+      });
+
+      // Floating animations
+      function initFloatingAnimations() {
+        const floatingElements = document.querySelectorAll(".floating");
+
+        floatingElements.forEach((element) => {
+          // Add continuous floating animation
+          element.style.animation = "float 3s ease-in-out infinite";
+        });
+      }
+
+      // Trading page functionality
+      function initTradingFeatures() {
+        // Order type toggle
+        const buyBtn = document.querySelector(
+          ".btn-group .btn-outline-primary"
+        );
+        const sellBtn = document.querySelector(
+          ".btn-group .btn-outline-danger"
+        );
+
+        if (buyBtn && sellBtn) {
+          buyBtn.addEventListener("click", function () {
+            buyBtn.classList.add("active");
+            sellBtn.classList.remove("active");
+            updateOrderType("buy");
+          });
+
+          sellBtn.addEventListener("click", function () {
+            sellBtn.classList.add("active");
+            buyBtn.classList.remove("active");
+            updateOrderType("sell");
+          });
+        }
+
+        // Trading pair selection
+        const tradingPairSelect = document.querySelector(
+          'select[class*="form-select"]'
+        );
+        if (tradingPairSelect) {
+          tradingPairSelect.addEventListener("change", function () {
+            updateTradingPair(this.value);
+          });
+        }
+
+        // Execute trade button
+        const executeBtn = document.querySelector(
+          '.btn:contains("Execute Trade")'
+        );
+        if (executeBtn) {
+          executeBtn.addEventListener("click", function () {
+            executeTrade();
+          });
+        }
+
+        // Real-time price updates (simulation)
+        setInterval(updatePrices, 5000);
+      }
+
+      function updateOrderType(type) {
+        const executeBtn = document.querySelector(
+          'button:contains("Execute Trade")'
+        );
+        if (executeBtn) {
+          if (type === "buy") {
+            executeBtn.className = "btn btn-success w-100";
+            executeBtn.innerHTML =
+              '<i class="fas fa-arrow-up me-2"></i>Buy Order';
+          } else {
+            executeBtn.className = "btn btn-danger w-100";
+            executeBtn.innerHTML =
+              '<i class="fas fa-arrow-down me-2"></i>Sell Order';
+          }
+        }
+      }
+
+      function updateTradingPair(pair) {
+        // Update price based on selected pair
+        const priceInput = document.querySelector(
+          'input[placeholder*="45,678.90"]'
+        );
+        if (priceInput) {
+          const prices = {
+            "BTC/USD": "45,678.90",
+            "ETH/USD": "3,245.67",
+            "LTC/USD": "156.78",
+          };
+          priceInput.placeholder = prices[pair] || "0.00";
+        }
+      }
+
+      function executeTrade() {
+        // Simulate trade execution
+        const amount = document.querySelector(
+          'input[placeholder="0.00"]'
+        ).value;
+        const price = document.querySelector(
+          'input[placeholder*="45,678.90"]'
+        ).value;
+
+        if (!amount || !price) {
+          showNotification("Please fill in all fields", "warning");
+          return;
+        }
+
+        showNotification("Trade executed successfully!", "success");
+
+        // Reset form
+        document.querySelector('input[placeholder="0.00"]').value = "";
+        document.querySelector('input[placeholder*="45,678.90"]').value = "";
+      }
+
+      // Performance table interactions
+      function initPerformanceTable() {
+        const performanceRows = document.querySelectorAll(".performance-row");
+
+        performanceRows.forEach((row) => {
+          row.addEventListener("click", function () {
+            // Highlight selected row
+            performanceRows.forEach((r) => r.classList.remove("table-active"));
+            this.classList.add("table-active");
+
+            // Show asset details (you can expand this)
+            const assetName = this.querySelector("strong").textContent;
+            showNotification(`Selected ${assetName}`, "info");
+          });
+
+          // Add hover effect
+          row.addEventListener("mouseenter", function () {
+            this.style.backgroundColor = "rgba(109, 40, 217, 0.1)";
+          });
+
+          row.addEventListener("mouseleave", function () {
+            if (!this.classList.contains("table-active")) {
+              this.style.backgroundColor = "";
+            }
+          });
+        });
+      }
+
+      // Analytics functionality
+      function initAnalytics() {
+        // Chart period buttons
+        const chartButtons = document.querySelectorAll(".btn-group .btn");
+
+        chartButtons.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            // Remove active class from siblings
+            this.parentElement.querySelectorAll(".btn").forEach((b) => {
+              b.classList.remove("btn-primary");
+              b.classList.add("btn-outline-primary");
+            });
+
+            // Add active class to clicked button
+            this.classList.remove("btn-outline-primary");
+            this.classList.add("btn-primary");
+
+            // Update chart (simulation)
+            updateChart(this.textContent);
+          });
+        });
+
+        // Animate progress bars
+        animateProgressBars();
+      }
+
+      function updateChart(period) {
+        // Simulate chart update
+        showNotification(`Chart updated for ${period} period`, "info");
+      }
+
+      function animateProgressBars() {
+        const progressBars = document.querySelectorAll(".progress-bar");
+
+        progressBars.forEach((bar) => {
+          const width = bar.style.width;
+          bar.style.width = "0%";
+
+          setTimeout(() => {
+            bar.style.transition = "width 1s ease-in-out";
+            bar.style.width = width;
+          }, 100);
+        });
+      }
+
+      // Form handling
+      function initFormHandling() {
+        const contactForm = document.querySelector("form");
+
+        if (contactForm) {
+          contactForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            // Validate form
+            if (validateContactForm(data)) {
+              showNotification("Message sent successfully!", "success");
+              this.reset();
+            }
+          });
+        }
+      }
+
+      function validateContactForm(data) {
+        const requiredFields = ["firstName", "lastName", "email", "message"];
+
+        for (let field of requiredFields) {
+          if (!data[field] || data[field].trim() === "") {
+            showNotification(`Please fill in the ${field} field`, "warning");
+            return false;
+          }
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(data.email)) {
+          showNotification("Please enter a valid email address", "warning");
+          return false;
+        }
+
+        return true;
+      }
+
+      // Price updates (simulation)
+      function updatePrices() {
+        const priceElements = document.querySelectorAll(
+          ".price-display, .stat-number"
+        );
+
+        priceElements.forEach((element) => {
+          if (element.textContent.includes("$")) {
+            // Add small random fluctuation
+            const currentPrice = parseFloat(
+              element.textContent.replace(/[$,]/g, "")
+            );
+            const fluctuation = (Math.random() - 0.5) * 0.02; // ±1%
+            const newPrice = currentPrice * (1 + fluctuation);
+
+            element.textContent =
+              "$" +
+              newPrice.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              });
+
+            // Add visual feedback for price changes
+            element.style.transition = "color 0.3s ease";
+            element.style.color = fluctuation > 0 ? "#22c55e" : "#ef4444";
+
+            setTimeout(() => {
+              element.style.color = "";
+            }, 1000);
+          }
+        });
+      }
+
+      // Notification system
+      function showNotification(message, type = "info") {
+        // Create notification element
+        const notification = document.createElement("div");
+        notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+        notification.style.cssText = `
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        min-width: 300px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    `;
+
+        notification.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+
+        document.body.appendChild(notification);
+
+        // Auto-remove after 3 seconds
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.classList.remove("show");
+            setTimeout(() => {
+              notification.remove();
+            }, 150);
+          }
+        }, 3000);
+      }
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Add keyboard navigation support
+      document.addEventListener("keydown", function (e) {
+        // Press 'h' for home
+        if (e.key === "h" && !e.ctrlKey && !e.altKey) {
+          showPage("home");
+        }
+        // Press 't' for trading
+        else if (e.key === "t" && !e.ctrlKey && !e.altKey) {
+          showPage("trading");
+        }
+        // Press 'p' for performance
+        else if (e.key === "p" && !e.ctrlKey && !e.altKey) {
+          showPage("performance");
+        }
+        // Press 'a' for analytics
+        else if (e.key === "a" && !e.ctrlKey && !e.altKey) {
+          showPage("analytics");
+        }
+        // Press 'n' for news
+        else if (e.key === "n" && !e.ctrlKey && !e.altKey) {
+          showPage("news");
+        }
+      });
+
+      // Mobile responsiveness enhancements
+      function handleMobileInteractions() {
+        // Touch-friendly interactions for mobile
+        if (window.innerWidth <= 768) {
+          // Add touch feedback to cards
+          document
+            .querySelectorAll(".card-custom, .stat-card")
+            .forEach((card) => {
+              card.addEventListener("touchstart", function () {
+                this.style.transform = "scale(0.98)";
+              });
+
+              card.addEventListener("touchend", function () {
+                this.style.transform = "scale(1)";
+              });
+            });
+        }
+      }
+
+      // Initialize mobile interactions
+      window.addEventListener("resize", handleMobileInteractions);
+      handleMobileInteractions();
+
+      // Add CSS animations
+      const style = document.createElement("style");
+      style.textContent = `
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+    
+    .performance-row {
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .performance-row:hover {
+        transform: translateX(5px);
+    }
+    
+    .card-custom, .stat-card {
+        transition: all 0.3s ease;
+    }
+    
+    .card-custom:hover, .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .btn {
+        transition: all 0.3s ease;
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+`;
+
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>
